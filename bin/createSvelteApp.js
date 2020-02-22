@@ -29,5 +29,6 @@ const templateCreated = (code) => {
 
 commands.createTemplate({
     projectName: args.name,
-    onDone: templateCreated
+    onDone: templateCreated,
+    isSapper: args.saper
 });
