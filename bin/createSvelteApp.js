@@ -13,7 +13,7 @@ console.clear();
 
 console.log(
     chalk.yellow(
-        figlet.textSync("SVELTE APP", { horizontalLayout: "full" })
+        figlet.textSync("SVELTE 3 APP", { horizontalLayout: "full" })
     )
 );
 

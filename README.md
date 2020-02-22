@@ -1,4 +1,4 @@
-# svelte-app
+# svelte3-app
 
 Creates a starter svelte application template
 
@@ -6,7 +6,7 @@ Creates a starter svelte application template
 
 Basic usage: enter in the taget folder and type
 ```
-npx svelte-app
+npx svelte3-app
 ```
 
 ### Input
