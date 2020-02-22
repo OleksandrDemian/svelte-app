@@ -1,0 +1,23 @@
+{
+  "name": "svelte-app",
+  "version": "1.0.0",
+  "description": "Creates a starter svelte application template",
+  "bin": {
+    "svelte-app": "bin/createSvelteApp.js"
+  },
+  "scripts": {
+    "svelte-app": "svelte-app"
+  },
+  "author": "Oleksandr Demian",
+  "license": "ISC",
+  "keywords": [
+    "cli",
+    "svelte",
+    "app"
+  ],
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "figlet": "^1.2.4",
+    "ora": "^4.0.3"
+  }
+}
