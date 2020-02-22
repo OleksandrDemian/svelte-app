@@ -21,7 +21,7 @@
     "ora": "^4.0.3"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/OleksandrDemian/svelte-app"
+    "type": "git",
+    "url": "https://github.com/OleksandrDemian/svelte-app"
   }
 }
