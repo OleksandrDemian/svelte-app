@@ -8,34 +8,73 @@ const isFlag = (value) => {
     return value.charAt(0) === '-';
 }
 
-const parseFlags = (args) => {
-    let map = {};
-    for(let i = 0; i < args.length; i++){
-        const arg = args[i];
-        // check if value is a flag
-        if(isFlag(arg)){
-            //map value
-            const flagName = arg.slice(1, arg.length);
-            const value = args[i+1];
-            
-            if(isFlag(value)){
-                throw "Missing value for " + flagName;
+const checkDefaults = (valuesMap, validators) => {
+    for(let prop of Object.keys(validators)){
+        if(valuesMap[prop] == null){
+            if(validators[prop].default != null){
+                valuesMap[prop] = validators[prop].default;
+            } else if(validators[prop].type === Boolean){
+                valuesMap[prop] = false;
             }
-
-            map[flagName] = value;
         }
     }
 
-    return map;
+    return valuesMap;
 }
 
-const getInput = () => {
+const checkAccepted = (valuesMap, validators) => {
+    for(let prop of Object.keys(validators)){
+        const accepts = validators[prop].accepts;
+        if(accepts != null){
+            if(valuesMap.hasOwnProperty(prop)){
+                if(!accepts.includes(valuesMap[prop])){
+                    throw valuesMap[prop] + " is not a valid input for " + prop;
+                }
+            }
+        }
+    }
+}
+
+const parseFlags = (args, validators) => {
+    let map = {};
+    for(let i = 0; i < args.length; i++){
+        const arg = args[i];
+
+        if(isFlag(arg)){
+            const flagName = arg.slice(1, arg.length);
+            const value = args[i+1];
+            const validator = validators[flagName];
+
+            let fValue = null;
+
+            if(validator.type === String){
+                if(isFlag(value)){
+                    throw "Missing value for " + flagName;
+                } else {
+                    map[flagName] = value;
+                }
+            } else if(validator.type === Boolean){
+                if(isFlag(value) || value == null){
+                    map[flagName] = true;
+                } else {
+                    map[flagName] = parseBool(value);
+                }
+            }
+        }
+    }
+
+    return checkDefaults(map, validators);
+}
+
+const getInput = (validation) => {
     const input = process.argv.slice(2, process.argv.length);
-    const args = parseFlags(input);
+    const args = parseFlags(input, validation);
+    checkAccepted(args, validation);
 
     return {
         name: args["n"],
-        saper: parseBool(args["s"])
+        saper: args["s"],
+        bundler: args["b"]
     }
 }
 

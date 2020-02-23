@@ -1,6 +1,6 @@
 {
   "name": "svelte3-app",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Creates a starter svelte application template",
   "bin": {
     "svelte3-app": "bin/createSvelteApp.js"
