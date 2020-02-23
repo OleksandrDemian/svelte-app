@@ -14,6 +14,15 @@ npx svelte3-app
 - `-s <true|false|0|1>` initialize the prject with sapper framework
 - `-b <rollup|webpack>` bundler to use (rollup is default)
 
+### Examples
+
+```
+npx svelte3-app -n svelte-rollup
+npx svelte3-app -n svelte-webpack -b webpack
+npx svelte3-app -n sapper-rollup -s
+npx svelte3-app -n sapper-webpack -b webpack -s
+```
+
 ### Templates
 
 - Svelte Rollup: https://github.com/sveltejs/template
