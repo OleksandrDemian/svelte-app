@@ -1,8 +1,8 @@
 #! /usr/bin/env node
 const commands = require("../lib/commands");
 const argsUtils = require("../utils/args");
-
-const chalk = require("chalk");
+const { GREEN, YELLOW, RED, print } = require("../utils/consoleColors");
+const { SHOW_CURSOR } = require("../lib/spinner");
 
 const INPUT_VALIDATION = {
     n: { type: String },
@@ -14,7 +14,6 @@ const INPUT_VALIDATION = {
     }
 }
 
-// EXECUTION
 console.clear();
 
 const installDependencies = (args) => {
@@ -22,12 +21,12 @@ const installDependencies = (args) => {
         projectName: args.name,
         onDone: function(code) {
             if(code === 0){
-                console.log("Svelte app created successfully");
+                print("Svelte app created successfully", GREEN);
             } else {
-                console.log(chalk.green("Failed to install dependencies"));
-                process.exit(1);
+                print("Failed to install dependencies", RED);
             }
 
+            SHOW_CURSOR();
             process.exit(code);
         }
     });
@@ -35,12 +34,12 @@ const installDependencies = (args) => {
 
 const createTemplate = (args) => {
     if(args.saper === true){
-        console.log(chalk.green("Sapper template will be used"));
+        print("Sapper template will be used", YELLOW);
     } else {
-        console.log(chalk.green("Standard Svelte3 template will be used"));
+        print("Standard Svelte3 template will be used", YELLOW);
     }
 
-    console.log(chalk.green("Bundler: " + args.bundler));
+    print("Bundler: " + args.bundler, YELLOW);
 
     commands.createTemplate({
         projectName: args.name,
@@ -48,22 +47,26 @@ const createTemplate = (args) => {
         bundler: args.bundler,
         onDone: code => {
             if(code === 0){
-                console.log("Template created successfully");
+                print("Template created successfully", GREEN);
                 installDependencies(args);
             } else {
-                console.log(chalk.red("Failed to create template"));
-                console.log(chalk.red("Possible problems:"));
-                console.log(chalk.red("- Target folder is not empty"));
+                print("Failed to create template", RED);
+                print("Possible problems:", RED);
+                print("- Target folder is not empty", RED);
+
+                SHOW_CURSOR();
                 process.exit(1);
             }
         }
     });
 }
 
+// EXECUTION
 try {
     const args = argsUtils.getInput(INPUT_VALIDATION);
     createTemplate(args);
 } catch (e) {
-    console.log(chalk.red(e));
+    print(e, RED);
+    SHOW_CURSOR();
     process.exit(1);
 }
