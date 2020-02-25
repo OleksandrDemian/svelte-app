@@ -1,6 +1,6 @@
 {
   "name": "svelte3-app",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Creates a starter svelte application template",
   "bin": {
     "svelte3-app": "bin/createSvelteApp.js"
@@ -16,9 +16,7 @@
     "app"
   ],
   "dependencies": {
-    "chalk": "^3.0.0",
-    "figlet": "^1.2.4",
-    "ora": "^4.0.3"
+    "chalk": "^3.0.0"
   },
   "repository": {
     "type": "git",

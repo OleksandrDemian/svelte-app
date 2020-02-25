@@ -3,7 +3,6 @@ const commands = require("../lib/commands");
 const argsUtils = require("../utils/args");
 
 const chalk = require("chalk");
-const figlet = require("figlet");
 
 const INPUT_VALIDATION = {
     n: { type: String },
@@ -17,12 +16,6 @@ const INPUT_VALIDATION = {
 
 // EXECUTION
 console.clear();
-
-console.log(
-    chalk.yellow(
-        figlet.textSync("SVELTE 3 APP", { horizontalLayout: "full" })
-    )
-);
 
 const installDependencies = (args) => {
     commands.installDependencies({
